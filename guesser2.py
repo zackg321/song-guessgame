@@ -4,9 +4,9 @@
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import json
 
-import random
-import re
+
 
 cid = 'b2079ac4f9724c90a3f89deb9726d640'
 secret = 'da41045a0037497ebc373568a7af1fa2'
@@ -26,10 +26,17 @@ def artist_top_tracks(my_artist_id):
     return search_results
 
 
-artist = input("Please enter an artist name: ")
-my_artist_id = get_artist_id(artist)
-print("Your artist's URI is: \n{}".format(my_artist_id))
-print("Top tracks for this artist are: \n")
-print(artist_top_tracks(my_artist_id))
 
+artist = input("Please choose an artist: ")
+
+my_artist_id = get_artist_id(artist)
+my_top_tracks = artist_top_tracks(my_artist_id)
+
+print(f"Your artist's ID is:{my_artist_id}\n")
+
+print("Your artist's top tracks are:\n")
+for track in my_top_tracks["tracks"]:
+    print(track["name"])
+    print(track["external_urls"]["spotify"])
+    print("\n")
 
